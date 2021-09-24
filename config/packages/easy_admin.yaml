@@ -1,0 +1,16 @@
+easy_admin:
+    site_name: Base de Datos de Conciliaciones
+
+    design:
+        menu:
+            - { route: 'inicio', label: 'Inicio', icon: 'home' }
+            - { entity: 'Departamento', label: 'Departamento', icon: 'map-marker' }
+            - { entity: 'Centro', label: 'Centro', icon: 'map-marker' }
+
+    entities:
+        # List the entity class name you want to manage
+        - App\Entity\Departamento
+        - App\Entity\Centro
+        - App\Entity\Reporte
+        #- App\Entity\Materia
+        - App\Entity\Edad
