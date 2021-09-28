@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Centro- {{ centro }}
+{% endblock %}
+
+{% block body %}
+    {{ dump() }}
+
+    <h2>{{ centro }} Conciliación</h2>
+
+    {% if reporte|length > 0  %}
+
+        <div>Se tiene {{ reporte|length }} de reportes registrados.</div>
+
+        {% for reporte in reporte %}
+
+            {% if reporte.fileReporte %}
+                <p>imagen</p>
+                <img src="{{ asset('images/' ~ reporte.fileReporte) }}" />
+            {% endif %}    
+
+            <h4>Gestion: {{ reporte.gestion }}</h4>
+            Actas:
+            <small>
+                {{ reporte.acta }}
+            </small>
+
+            <p>Conciliaciones virtuales:{{ reporte.virtual }}</p>
+            <br>
+        {% endfor %}
+
+        {% if anterior >= 0 %}
+            <a href="{{ path('centros_show', { id: centro.id, offset: anterior }) }}">Anterior</a>
+        {% endif %}
+
+        {% if siguiente < reporte|length %}
+            <a href="{{ path('centros_show', { id: centro.id, offset: siguiente }) }}">Siguiente</a>
+        {% endif%}
+
+    {% else%}
+        <div>No se tiene registrado REPORTES</div>
+    {% endif %}
+{% endblock %}

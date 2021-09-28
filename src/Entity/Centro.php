@@ -75,6 +75,11 @@ class Centro
     private $fax;
 
     /**
+     * @ORM\Column(type="string", length=150, nullable=true)
+     */
+    private $correo;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Departamento::class, inversedBy="centro")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -270,6 +275,18 @@ class Centro
                 $reporte->setCentro(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCorreo(): ?string
+    {
+        return $this->correo;
+    }
+
+    public function setCorreo(?string $correo): self
+    {
+        $this->correo = $correo;
 
         return $this;
     }

@@ -6,11 +6,60 @@ easy_admin:
             - { route: 'inicio', label: 'Inicio', icon: 'home' }
             - { entity: 'Departamento', label: 'Departamento', icon: 'map-marker' }
             - { entity: 'Centro', label: 'Centro', icon: 'map-marker' }
+            - { entity: 'Reporte', label: 'Reporte', icon: 'file' }
 
     entities:
+        Departamento:
+            class: App\Entity\Departamento
+
+        Localidad:
+            class: App\Entity\Localidad
+
+        Reporte:
+            class: App\Entity\Reporte
+
+        Centro:
+            class: App\Entity\Centro
+
+            list:
+                fields:
+                    - { property: 'nombreCentro' }
+                    - { property: 'matricula', type: 'text' }
+                    #- { property: 'resolucion', type: 'text' }
+                    - { property: 'inicioVigencia', type: 'date' }
+                    - { property: 'finVigencia', type: 'date' }
+                    - { property: 'nombreCentro', type: 'text' }
+                    - { property: 'representante', type: 'text' }
+                    - { property: 'cargo', type: text }
+                    - { property: 'dpto' }
+                    #- { property: 'zona', type: 'text' }
+                    #- { property: 'direccion', type: 'text' }
+                    - { property: 'telefono', type: 'text' }
+                    #- { property: 'fax', type: 'integer' }
+                    - { property: 'correo', type: 'email' }
+                sort: [ 'nombreCentro', 'ASC' ]
+                filters: [ 'dpto' ]
+
+            edit:
+                fields:
+                    - { property: 'nombreCentro' }
+                    - { property: 'matricula', type: 'text' }
+                    - { property: 'resolucion', type: 'text' }
+                    - { property: 'inicioVigencia', type: 'date' }
+                    - { property: 'finVigencia', type: 'date' }
+                    - { property: 'nombreCentro', type: 'text' }
+                    - { property: 'representante', type: 'text' }
+                    - { property: 'cargo', type: 'text' }
+                    - { property: 'dpto' }
+                    - { property: 'zona', type: 'text' }
+                    - { property: 'direccion', type: 'text' }
+                    - { property: 'telefono', type: 'integer' }
+                    - { property: 'fax', type: 'integer' }
+                    - { property: 'correo', type: 'email' }
+
         # List the entity class name you want to manage
-        - App\Entity\Departamento
-        - App\Entity\Centro
-        - App\Entity\Reporte
+        #- App\Entity\Departamento
+        #- App\Entity\Centro
+        #- App\Entity\Reporte
         #- App\Entity\Materia
-        - App\Entity\Edad
+        #- App\Entity\Edad

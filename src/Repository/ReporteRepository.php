@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Centro;
 use App\Entity\Reporte;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,9 +16,25 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ReporteRepository extends ServiceEntityRepository
 {
+    /*Cantidad de FILAS A MOSTRAR en pantalla*/
+    public const PAGINATOR_PER_PAGE = 3;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Reporte::class);
+    }
+
+    public function getReportePaginator(Centro $centro, int $offset): Paginator
+    {
+        $query = $this -> createQueryBuilder('r')
+            -> andWhere('r.centro = :centro')
+            -> setParameter('centro', $centro)
+            -> orderBy('r.gestion', 'DESC')
+            -> setMaxResults(self::PAGINATOR_PER_PAGE)
+            -> setFirstResult($offset)
+            -> getQuery()
+        ;
+        return new Paginator($query);
     }
 
     // /**

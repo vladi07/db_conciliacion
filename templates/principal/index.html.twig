@@ -1,9 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Hello PrincipalController!
+    DB-Conciliación
 {% endblock %}
 
 {% block body %}
-    <img src="/images/SitioContruccion.jpg" />
+    {# imprimimos el contenido de llave #}
+    {{ dump(centros) }}
+    <h2>Centros de Conciliación Registrados</h2>
+
+    {# for OBJETO in LLAVE O PARAMETRO #}
+    {% for centro in centros %}
+        {# Objeto que se envia al por el parametro #}
+        <h4>{{ centro }}</h4>
+    {% endfor %}
+
 {% endblock %}

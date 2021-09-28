@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Centros
+{% endblock %}
+
+{% block body %}
+
+    <h2>Centros de Conciliación</h2>
+
+    {% for centro in centros%}
+
+        <h4>{{ centro }}</h4>
+        
+        <p>
+            <a href="{{ path('centros_show', {'id': centro.id}) }}">Ver</a>
+        </p>
+
+    {% endfor %}
+
+{% endblock %}
