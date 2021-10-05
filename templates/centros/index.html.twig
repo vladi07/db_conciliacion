@@ -6,15 +6,13 @@
 
 {% block body %}
 
-    <h2>Centros de Conciliación</h2>
-
-    {% for centro in centros%}
-
+    <h2>Index de los Centros de Conciliación</h2>
+    {# objeto CENTRO en el parametro CENTROS enviado desde el CONTROLLER #}
+    {% for centro in centros %}
+        {# Se imprime el objeto CENTRO #}
         <h4>{{ centro }}</h4>
-        
-        <p>
-            <a href="{{ path('centros_show', {'id': centro.id}) }}">Ver</a>
-        </p>
+        {# Añadimos el un LINK para ver detaller del objeto #}
+        <a href="{{ path('centros_show', {'id': centro.id}) }}">Ver</a>
 
     {% endfor %}
 
