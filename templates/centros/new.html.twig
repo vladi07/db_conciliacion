@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    New Centro|{{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {{ dump() }}
+    <h2>Datos del Nuevo Centro</h2>
+
+    {{ form(formCentro) }}
+
+    <a href="{{ path('centros_index') }}">Volver</a>
+
+{% endblock %}

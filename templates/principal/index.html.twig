@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    DB-Conciliación
+    Dashboard {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -14,5 +14,22 @@
         {# Objeto que se envia al por el parametro #}
         <h4>{{ centro }}</h4>
     {% endfor %}
+    <hr>
+    <div>
+        <h2>Modulo de Departamentos</h2>
+        <a href="{{ path('departamento_index') }}" class="">Ingresar</a>
+    </div>
+    <div>
+        <h2>Módulo de Centros</h2>
+        <a href="{{ path('centros_index') }}" class="">Ingresar</a>
+    </div>
+    <div>
+        <h2>Módulo de Reportes</h2>
+        <a href="" class="">Ingresar</a>
+    </div>
+    <div>
+        <h2>Módulo de Usuarios</h2>
+        <a href="{{ path('usuario_index') }}" class="">Ingresar</a>
+    </div>
 
 {% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    New User|{{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1>Nuevo Usuario</h1>
+
+    {{ include('usuario/_form.html.twig') }}
+
+    <a href="{{ path('usuario_index') }}">Volver</a>
+{% endblock %}

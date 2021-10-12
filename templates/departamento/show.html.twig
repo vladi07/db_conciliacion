@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Dpto|{{ departamento }}
+{% endblock %}
+
+{% block body %}
+    {{ dump() }}
+
+    <h2>Datos del Departamento de: {{ departamento }}</h2>
+
+    <a href="{{ path('departamento_index') }}">Volver a lista de Departamento</a>
+    <hr>
+    <div>
+        Se tiene [<b>{{ localidad|length }}</b>] localidades registradas
+    </div>
+
+    <hr>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ departamento.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ departamento.nombre }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+
+    <a href="{{ path('departamento_index') }}">Volver</a>
+
+    <a href="{{ path('departamento_edit', {'id': departamento.id}) }}">Editar</a>
+
+    {{ include('departamento/_delete_form.html.twig') }}
+
+    <br>
+
+    {# Formulario para agregar localidades #}
+    <h2>Localidades Registradas en este Departamento</h2>
+    {% if localidad|length > 0 %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for localidad in localidad %}
+                <tr>
+                    <td>{{ localidad.id }}</td>
+                    <td>{{ localidad.nombre }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {#
+        {% for localidad in localidad %}
+            <h4>Id: {{ localidad.id }}</h4>
+            <h4>Nombre: {{ localidad.nombre }}</h4>
+        {% endfor %}
+        #}
+        {% if anterior >= 0 %}
+            <a href="{{ path('departamento_show', { id: departamento.id, offset: anterior }) }}">Anterior</a>
+        {% endif %}
+
+        {% if siguiente < localidad|length %}
+            <a href="{{ path('departamento_show', { id: departamento.id, offset: siguiente }) }}">Siguiente</a>
+        {% endif %}
+
+    {% else %}
+        <div>No se tiene registrado ninguna LOCALIDAD</div>
+    {% endif %}
+
+    <h3>Añadir una localidad</h3>
+    {{ form(localidad_form) }}
+
+{% endblock %}

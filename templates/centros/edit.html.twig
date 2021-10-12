@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Edit Centro|{{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {{ dump() }}
+    <h2>Editar datos del: {{ centro }}</h2>
+    <a href="{{ path('centros_index') }}">Volver a Lista de Centros</a>
+
+    <hr>
+    {{ form(formCentro) }}
+
+{% endblock %}

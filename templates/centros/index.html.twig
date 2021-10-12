@@ -1,19 +1,60 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Centros
+    Centro|{{ parent() }}
 {% endblock %}
 
 {% block body %}
 
-    <h2>Index de los Centros de Conciliación</h2>
-    {# objeto CENTRO en el parametro CENTROS enviado desde el CONTROLLER #}
-    {% for centro in centros %}
-        {# Se imprime el objeto CENTRO #}
-        <h4>{{ centro }}</h4>
-        {# Añadimos el un LINK para ver detaller del objeto #}
-        <a href="{{ path('centros_show', {'id': centro.id}) }}">Ver</a>
+    <h2>Centros de Conciliación</h2>
 
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success" >
+            {{ message }}
+        </div>
     {% endfor %}
+
+    <a href="{{ path('inicio') }}" class="btn">Volver a Inicio</a>
+    <a href="{{ path('centros_new') }}" class="btn">Nuevo</a>
+    <hr>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre del Centro</th>
+                <th>Matricula</th>
+                <th>Representante Legal</th>
+                <th>Departamento</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {# objeto CENTRO en el parametro CENTROS enviado desde el CONTROLLER #}
+        {% for centro in centros %}
+            <tr>
+                <td>{{ centro.id }}</td>
+                <td>{{ centro.nombreCentro }}</td>
+                <td>{{ centro.matricula }}</td>
+                <td>{{ centro.representante }}</td>
+                <td>{{ centro.dpto }}</td>
+                <td>{{ centro.telefono }}</td>
+                <td>
+                    {# Añadimos el un LINK para ver detaller del objeto #}
+                    <a href="{{ path('centros_show', {'id': centro.id}) }}">Ver</a>
+                    <a href="{{ path('centros_edit', {'id': centro.id}) }}">Editar</a>
+                </td>
+            </tr>
+            {# Se imprime el objeto CENTRO
+            <h4>{{ centro }}</h4>#}
+        {% else %}
+            <tr>
+                <td colspan="3">No se encontraron registros</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
 
 {% endblock %}

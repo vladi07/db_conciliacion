@@ -7,6 +7,7 @@ easy_admin:
             - { entity: 'Departamento', label: 'Departamento', icon: 'map-marker' }
             - { entity: 'Centro', label: 'Centro', icon: 'map-marker' }
             - { entity: 'Reporte', label: 'Reporte', icon: 'file' }
+            - { entity: 'Usuario', label: 'Usuarios', icon: 'user' }
 
     entities:
         Departamento:
@@ -17,6 +18,17 @@ easy_admin:
 
         Reporte:
             class: App\Entity\Reporte
+
+            list:
+                fields:
+                    - { property: 'centro'}
+                    - { property: 'gestion' }
+                    - { property: 'acta' }
+                    - { property: 'virtual' }
+                    - { property: 'fileReporte', type: 'image', 'base_path': "/uploads/files", label: 'Archivo' }
+                sort: ['centro', 'ASC']
+                filters: ['centro']
+
 
         Centro:
             class: App\Entity\Centro
@@ -58,8 +70,26 @@ easy_admin:
                     - { property: 'correo', type: 'email' }
 
         # List the entity class name you want to manage
-        #- App\Entity\Departamento
-        #- App\Entity\Centro
-        #- App\Entity\Reporte
         #- App\Entity\Materia
         #- App\Entity\Edad
+
+        Usuario:
+            class: App\Entity\Usuario
+
+            list:
+                fields:
+                    - { property: 'nombre' }
+                    - { property: 'primerApellido' }
+                    - { property: 'segundoApellido' }
+                    - { property: 'username' }
+                    - { property: 'password' }
+                    - { property: 'roles' }
+
+            new:
+                fields:
+                    - { property: 'nombre' }
+                    - { property: 'username' }
+                    - { property: 'password' }
+                    #- { property: 'roles', }
+                    - { property: 'primerApellido' }
+                    - { property: 'segundoApellido' }

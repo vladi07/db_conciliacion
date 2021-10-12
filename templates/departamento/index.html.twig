@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Dpto|{{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1>Departamentos Registrados</h1>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <a href="{{ path('departamento_new') }}">Nuevo</a>
+
+    <a href="{{ path('inicio') }}">Volver a Inicio</a>
+    <br>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre del Departamento</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for departamento in departamentos %}
+            <tr>
+                <td>{{ departamento.id }}</td>
+                <td>{{ departamento.nombre }}</td>
+                <td>
+                    <a href="{{ path('departamento_show', {'id': departamento.id}) }}">Ver</a>
+                    <a href="{{ path('departamento_edit', {'id': departamento.id}) }}">Editar</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">No se encontraron registros</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Departamento;
 use App\Entity\Localidad;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,9 +16,24 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class LocalidadRepository extends ServiceEntityRepository
 {
+    public const PAGINATOR_PER_PAGE = 3;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Localidad::class);
+    }
+
+    public function getLocalidadPaginator(Departamento $departamento, int $offset): Paginator
+    {
+        $query = $this -> createQueryBuilder('l')
+            -> andWhere('l.dpto = :departamento')
+            -> setParameter('departamento', $departamento)
+            -> orderBy('l.nombre', 'ASC')
+            -> setMaxResults(self::PAGINATOR_PER_PAGE)
+            -> setFirstResult($offset)
+            -> getQuery()
+        ;
+        return new Paginator($query);
     }
 
     // /**

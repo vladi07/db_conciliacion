@@ -1,39 +1,142 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Centro- {{ centro }}
+    Centro|{{ centro }}
 {% endblock %}
 
 {% block body %}
-    {{ dump() }}
+    {# Nombre del Centro #}
+    <h2>Datos del: {{ centro }}</h2>
+    {# Volver a lista #}
+    <a href="{{ path('centros_index') }}">Volver a Lista de Centros</a>
+    <hr>
+    {# Se visualiza los datos del centro #}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ centro.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ centro.nombreCentro }}</td>
+            </tr>
+            <tr>
+                <th>Matricula</th>
+                <td>{{ centro.matricula }}</td>
+            </tr>
+            <tr>
+                <th>Nro. de Resolución de la Matricula</th>
+                <td>{{ centro.resolucion }}</td>
+            </tr>
+            <tr>
+                <th>Inicio de la Vigencia de la Matricula</th>
+                <td>{{ centro.inicioVigencia ? centro.inicioVigencia|date('d-m-Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Finalización de la Vigencia de la Matricula</th>
+                <td>{{ centro.finVigencia ? centro.finVigencia|date('d-m-Y'): '' }}</td>
+            </tr>
+            <tr>
+                <th>Nombre del Representante Legal</th>
+                <td>{{ centro.representante }}</td>
+            </tr>
+            <tr>
+                <th>Cargo del Representante Legal</th>
+                <td>{{ centro.cargo }}</td>
+            </tr>
+            <tr>
+                <th>Departamento</th>
+                <td>{{ centro.dpto }}</td>
+            </tr>
+            <tr>
+                <th>Zona o Barrio</th>
+                <td>{{ centro.zona }}</td>
+            </tr>
+            <tr>
+                <th>Dirección</th>
+                <td>{{ centro.direccion }}</td>
+            </tr>
+            <tr>
+                <th>Telefono de Contacto</th>
+                <td>{{ centro.telefono }}</td>
+            </tr>
+            <tr>
+                <th>Número de Fax</th>
+                <td>{{ centro.fax }}</td>
+            </tr>
+            <tr>
+                <th>Correo Electronico</th>
+                <td>{{ centro.correo }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <div>
+        Se tiene [<b>{{ reporte|length }}</b>] reportes registrados
+    </div>
+    <hr>
+    <h2>Reportes registrados del Centro</h2>
 
-    <h2>Nombre: {{ centro }}</h2>
     {# condicional si el REPORTE es MAYOR a 0, se ejecuta el proceso #}
     {% if reporte|length > 0  %}
-
+        {# Cantidad de Reportes
         <div>Se tiene [<b>{{ reporte|length }}</b>] reportes registrados</div>
         <hr>
-
-        {% for reporte in reporte %}
-
+        #}
+        {# {% for reporte in reporte %} #}
+            {#
             <h4>Gestion: {{ reporte.gestion }}</h4>
-
             Actas:
             <small>
                 {{ reporte.acta }}
             </small>
-
             <p>Conciliaciones virtuales: {{ reporte.virtual }}</p>
+            #}
 
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Gestión</th>
+                        <th>Formulario</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for reporte in reporte %}
+                    <tr>
+                        <td>{{ reporte.gestion }}</td>
+                        <td>
+                            {% if reporte.fileReporte %}
+                                <p>Imagen</p>
+                                <img src="{{ asset('public/uploads/files' ~ reporte.fileReporte) }}" />
+                            {% else%}
+                                <b>No tiene formulario cargado</b>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="">Ver</a>
+                            <a href="">Editar</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">No se encontraron registros</td>
+                    </tr>
+                {% endfor%}
+                </tbody>
+            </table>
+            {#
             {% if reporte.fileReporte %}
-                <p>imagen</p>
-                <img src="{{ asset('images/' ~ reporte.fileReporte) }}" />
+                <p>Imagen</p>
+                <img src="{{ asset('public/uploads/files' ~ reporte.fileReporte) }}" />
             {% else%}
                 <b>No tiene formulario cargado</b>
             {% endif %}
+            #}
 
-            <hr>
-        {% endfor %}
+        {# {% endfor %} #}
+
         <br>
         {% if anterior >= 0 %}
             <a href="{{ path('centros_show', { id: centro.id, offset: anterior }) }}">Anterior</a>
