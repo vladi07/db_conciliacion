@@ -5,78 +5,112 @@
 {% endblock %}
 
 {% block body %}
-    {{ dump() }}
+    <div class="container d-flex justify-content-center">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="font-weight-bolder">Datos del Departamento de: {{ departamento }}</h2>
+                <a href="{{ path('departamento_index') }}" class="btn btn-primary">
+                    <i class="bi bi-arrow-return-left"></i>
+                    Volver a lista
+                </a>
+                <a href="{{ path('departamento_edit', {'id': departamento.id}) }}" class="btn btn-success">
+                    <i class="bi bi-pencil-square"></i>
+                    Editar
+                </a>
+                <a class="btn">
+                    {{ include('departamento/_delete_form.html.twig') }}
+                </a>
+                {#
+                <div>
+                    Se tiene [<b>{{ localidad|length }}</b>] localidades registradas
+                </div>
+                <hr>
+                #}
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ departamento.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nombre</th>
+                        <td>{{ departamento.nombre }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br>
+                {#
+                <div class="card">
+                #}
+                {# Formulario para agregar localidades
+            <div class="card card-title">
+                <h2>Localidades Registradas en este Departamento</h2>
+            </div>
+            <div class="card card-body">
+                {% if localidad|length > 0 %}
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for localidad in localidad %}
+                            <tr>
+                                <td>{{ localidad.id }}</td>
+                                <td>{{ localidad.nombre }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                #}
+                {#
+                {% for localidad in localidad %}
+                    <h4>Id: {{ localidad.id }}</h4>
+                    <h4>Nombre: {{ localidad.nombre }}</h4>
+                {% endfor %}
+                #}
+                {#
 
-    <h2>Datos del Departamento de: {{ departamento }}</h2>
-
-    <a href="{{ path('departamento_index') }}">Volver a lista de Departamento</a>
-    <hr>
-    <div>
-        Se tiene [<b>{{ localidad|length }}</b>] localidades registradas
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li>
+                            {% if anterior >= 0 %}
+                                <a href="{{ path('departamento_show', { id: departamento.id, offset: anterior }) }}">
+                                    <button class="btn btn-success">
+                                        <i class="bi bi-arrow-left-square"></i>
+                                        Anterior
+                                    </button>
+                                </a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if siguiente < localidad|length %}
+                                <a href="{{ path('departamento_show', { id: departamento.id, offset: siguiente }) }}">
+                                    <button class="btn btn-success">
+                                        <i class="bi bi-arrow-right-square"></i>
+                                        Siguiente
+                                    </button>
+                                </a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </nav>
+            {% else %}
+                <div>No se tiene registrado ninguna LOCALIDAD</div>
+            {% endif %}
+        </div>
     </div>
 
-    <hr>
+    <div class="card">
+        <h3>Añadir una localidad</h3>
+        {{ form(localidad_form) }}
+    </div>
+                #}
+            </div>
+            </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ departamento.id }}</td>
-            </tr>
-            <tr>
-                <th>Nombre</th>
-                <td>{{ departamento.nombre }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <br>
-
-    <a href="{{ path('departamento_index') }}">Volver</a>
-
-    <a href="{{ path('departamento_edit', {'id': departamento.id}) }}">Editar</a>
-
-    {{ include('departamento/_delete_form.html.twig') }}
-
-    <br>
-
-    {# Formulario para agregar localidades #}
-    <h2>Localidades Registradas en este Departamento</h2>
-    {% if localidad|length > 0 %}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nombre</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for localidad in localidad %}
-                <tr>
-                    <td>{{ localidad.id }}</td>
-                    <td>{{ localidad.nombre }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        {#
-        {% for localidad in localidad %}
-            <h4>Id: {{ localidad.id }}</h4>
-            <h4>Nombre: {{ localidad.nombre }}</h4>
-        {% endfor %}
-        #}
-        {% if anterior >= 0 %}
-            <a href="{{ path('departamento_show', { id: departamento.id, offset: anterior }) }}">Anterior</a>
-        {% endif %}
-
-        {% if siguiente < localidad|length %}
-            <a href="{{ path('departamento_show', { id: departamento.id, offset: siguiente }) }}">Siguiente</a>
-        {% endif %}
-
-    {% else %}
-        <div>No se tiene registrado ninguna LOCALIDAD</div>
-    {% endif %}
-
-    <h3>Añadir una localidad</h3>
-    {{ form(localidad_form) }}
+        </div>
 
 {% endblock %}

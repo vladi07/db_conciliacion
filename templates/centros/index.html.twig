@@ -5,56 +5,70 @@
 {% endblock %}
 
 {% block body %}
+    <div class="container d-flex justify-content-center">
+        <div class="card w-75">
+            <div class="card-body">
+                <h2 class="font-weight-bolder">Centros de Conciliación Registrados</h2>
 
-    <h2>Centros de Conciliación</h2>
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success" >
+                        {{ message }}
+                    </div>
+                {% endfor %}
 
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success" >
-            {{ message }}
-        </div>
-    {% endfor %}
-
-    <a href="{{ path('inicio') }}" class="btn">Volver a Inicio</a>
-    <a href="{{ path('centros_new') }}" class="btn">Nuevo</a>
-    <hr>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombre del Centro</th>
-                <th>Matricula</th>
-                <th>Representante Legal</th>
-                <th>Departamento</th>
-                <th>Teléfono</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-        {# objeto CENTRO en el parametro CENTROS enviado desde el CONTROLLER #}
-        {% for centro in centros %}
-            <tr>
-                <td>{{ centro.id }}</td>
-                <td>{{ centro.nombreCentro }}</td>
-                <td>{{ centro.matricula }}</td>
-                <td>{{ centro.representante }}</td>
-                <td>{{ centro.dpto }}</td>
-                <td>{{ centro.telefono }}</td>
-                <td>
-                    {# Añadimos el un LINK para ver detaller del objeto #}
-                    <a href="{{ path('centros_show', {'id': centro.id}) }}">Ver</a>
-                    <a href="{{ path('centros_edit', {'id': centro.id}) }}">Editar</a>
-                </td>
-            </tr>
-            {# Se imprime el objeto CENTRO
+                <a href="{{ path('inicio') }}" class="btn btn-primary ">
+                    <i class="bi bi-arrow-return-left"></i>
+                    Volver a Inicio
+                </a>
+                <a href="{{ path('centros_new') }}" class="btn btn-success">
+                    <i class="bi bi-plus-square"></i>
+                    Nuevo
+                </a>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre del Centro</th>
+                        <th scope="col">Matricula</th>
+                        <th scope="col">Representante Legal</th>
+                        <th scope="col">Departamento</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {# objeto CENTRO en el parametro CENTROS enviado desde el CONTROLLER #}
+                    {% for centro in centros %}
+                        <tr>
+                            <td>{{ centro.id }}</td>
+                            <td>{{ centro.nombreCentro }}</td>
+                            <td>{{ centro.matricula }}</td>
+                            <td>{{ centro.representante }}</td>
+                            <td>{{ centro.dpto }}</td>
+                            <td>{{ centro.telefono }}</td>
+                            <td>
+                                {# Añadimos el un LINK para ver detaller del objeto #}
+                                <a href="{{ path('centros_show', {'id': centro.id}) }}" class="btn btn-success">
+                                    <i class="bi bi-eye-fill"></i>
+                                    Ver
+                                </a>
+                                <a href="{{ path('centros_edit', {'id': centro.id}) }}" class="btn btn-primary">
+                                    <i class="bi bi-pencil-square"></i>
+                                    Editar
+                                </a>
+                            </td>
+                        </tr>
+                        {# Se imprime el objeto CENTRO
             <h4>{{ centro }}</h4>#}
-        {% else %}
-            <tr>
-                <td colspan="3">No se encontraron registros</td>
-            </tr>
-        {% endfor %}
-
-        </tbody>
-    </table>
-
+                    {% else %}
+                        <tr>
+                            <td colspan="3">No se encontraron registros</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <hr>
+    </div>
 {% endblock %}

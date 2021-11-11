@@ -9,7 +9,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @method Centro|null find($id, $lockMode = null, $lockVersion = null)
  * @method Centro|null findOneBy(array $criteria, array $orderBy = null)
- * @method Centro[]    findAll()
+ //* @method Centro[]    findAll()
  * @method Centro[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class CentroRepository extends ServiceEntityRepository
@@ -17,6 +17,10 @@ class CentroRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Centro::class);
+    }
+
+    public function findAll(){
+        return $this->findBy([],['nombreCentro' => 'ASC', 'dpto' => 'ASC']);
     }
 
     // /**

@@ -12,6 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    const REGISTRO_EXITOSO= 'Se ha registrado exitosamente';
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -50,9 +51,14 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $segundoApellido;
 
+    public function __construct()
+    {
+
+    }
+
     public function __toString()
     {
-        return $this->nombre.''.$this->primerApellido.''.$this->segundoApellido;
+        return $this->nombre.' '.$this->primerApellido.' '.$this->segundoApellido;
     }
 
     public function getId(): ?int

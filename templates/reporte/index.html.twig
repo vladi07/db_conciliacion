@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reporte index{% endblock %}
+
+{% block body %}
+    <div class="container d-flex justify-content-center">
+        <div class="card">
+            <div class="card-body">
+                <h1>Reportes Registrados</h1>
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <a href="{{ path('reporte_new') }}" class="btn btn-success">
+                    <i class="bi bi-plus-square"></i>
+                    Crear nuevo
+                </a>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Gestión</th>
+                        <th>Actas Elaboradas y Archivadas</th>
+                        <th>Casos Efectuados de Forma Virtual</th>
+                        <th>FileReporte</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for reporte in reportes %}
+                        <tr>
+                            <td>{{ reporte.id }}</td>
+                            <td>{{ reporte.gestion }}</td>
+                            <td>{{ reporte.acta }}</td>
+                            <td>{{ reporte.virtual }}</td>
+                            <td>{{ reporte.fileReporte }}</td>
+                            <td>
+                                <a href="{{ path('reporte_show', {'id': reporte.id}) }}" class="btn btn-success">
+                                    <i class="bi bi-eye-fill"></i>
+                                    Ver
+                                </a>
+                                <a href="{{ path('reporte_edit', {'id': reporte.id}) }}" class="btn btn-primary">
+                                    <i class="bi bi-pencil-square"></i>
+                                    Editar
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">No se encontraron registros</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

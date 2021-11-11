@@ -5,9 +5,18 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Nuevo Departamento</h1>
+    <div class="container d-flex justify-content-center">
+        <div class="card">
+            <div class="card-body">
+                <h1>Nuevo Departamento</h1>
 
-    {{ include('departamento/_form.html.twig') }}
+                {{ include('departamento/_form.html.twig') }}
 
-    <a href="{{ path('departamento_index') }}">Volver</a>
+                <a href="{{ path('departamento_index') }}" class="btn btn-primary">
+                    <i class="bi bi-arrow-return-left"></i>
+                    Volver
+                </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

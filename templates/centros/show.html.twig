@@ -5,153 +5,182 @@
 {% endblock %}
 
 {% block body %}
-    {# Nombre del Centro #}
-    <h2>Datos del: {{ centro }}</h2>
-    {# Volver a lista #}
-    <a href="{{ path('centros_index') }}">Volver a Lista de Centros</a>
-    <hr>
-    {# Se visualiza los datos del centro #}
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ centro.id }}</td>
-            </tr>
-            <tr>
-                <th>Nombre</th>
-                <td>{{ centro.nombreCentro }}</td>
-            </tr>
-            <tr>
-                <th>Matricula</th>
-                <td>{{ centro.matricula }}</td>
-            </tr>
-            <tr>
-                <th>Nro. de Resolución de la Matricula</th>
-                <td>{{ centro.resolucion }}</td>
-            </tr>
-            <tr>
-                <th>Inicio de la Vigencia de la Matricula</th>
-                <td>{{ centro.inicioVigencia ? centro.inicioVigencia|date('d-m-Y') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Finalización de la Vigencia de la Matricula</th>
-                <td>{{ centro.finVigencia ? centro.finVigencia|date('d-m-Y'): '' }}</td>
-            </tr>
-            <tr>
-                <th>Nombre del Representante Legal</th>
-                <td>{{ centro.representante }}</td>
-            </tr>
-            <tr>
-                <th>Cargo del Representante Legal</th>
-                <td>{{ centro.cargo }}</td>
-            </tr>
-            <tr>
-                <th>Departamento</th>
-                <td>{{ centro.dpto }}</td>
-            </tr>
-            <tr>
-                <th>Zona o Barrio</th>
-                <td>{{ centro.zona }}</td>
-            </tr>
-            <tr>
-                <th>Dirección</th>
-                <td>{{ centro.direccion }}</td>
-            </tr>
-            <tr>
-                <th>Telefono de Contacto</th>
-                <td>{{ centro.telefono }}</td>
-            </tr>
-            <tr>
-                <th>Número de Fax</th>
-                <td>{{ centro.fax }}</td>
-            </tr>
-            <tr>
-                <th>Correo Electronico</th>
-                <td>{{ centro.correo }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <br>
-    <div>
-        Se tiene [<b>{{ reporte|length }}</b>] reportes registrados
-    </div>
-    <hr>
-    <h2>Reportes registrados del Centro</h2>
+    <div class="container">
+        <div class="row align-items-stretch">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        {# Nombre del Centro #}
+                        <h2>Datos del: {{ centro }}</h2>
+                        {# Volver a lista #}
+                        <a href="{{ path('centros_index') }}" class="btn btn-primary">
+                            <i class="bi bi-arrow-return-left"></i>
+                            Volver a Lista de Centros
+                        </a>
+                        <br>
+                        {# Se visualiza los datos del centro #}
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr>
+                                <th>Id</th>
+                                <td>{{ centro.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Nombre</th>
+                                <td>{{ centro.nombreCentro }}</td>
+                            </tr>
+                            <tr>
+                                <th>Matricula</th>
+                                <td>{{ centro.matricula }}</td>
+                            </tr>
+                            <tr>
+                                <th>Nro. de Resolución de la Matricula</th>
+                                <td>{{ centro.resolucion }}</td>
+                            </tr>
+                            <tr>
+                                <th>Inicio de la Vigencia de la Matricula</th>
+                                <td>{{ centro.inicioVigencia ? centro.inicioVigencia|date('d-m-Y') : '' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Finalización de la Vigencia de la Matricula</th>
+                                <td>{{ centro.finVigencia ? centro.finVigencia|date('d-m-Y'): '' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Nombre del Representante Legal</th>
+                                <td>{{ centro.representante }}</td>
+                            </tr>
+                            <tr>
+                                <th>Cargo del Representante Legal</th>
+                                <td>{{ centro.cargo }}</td>
+                            </tr>
+                            <tr>
+                                <th>Departamento</th>
+                                <td>{{ centro.dpto }}</td>
+                            </tr>
+                            <tr>
+                                <th>Zona o Barrio</th>
+                                <td>{{ centro.zona }}</td>
+                            </tr>
+                            <tr>
+                                <th>Dirección</th>
+                                <td>{{ centro.direccion }}</td>
+                            </tr>
+                            <tr>
+                                <th>Telefono de Contacto</th>
+                                <td>{{ centro.telefono }}</td>
+                            </tr>
+                            <tr>
+                                <th>Número de Fax</th>
+                                <td>{{ centro.fax }}</td>
+                            </tr>
+                            <tr>
+                                <th>Correo Electronico</th>
+                                <td>{{ centro.correo }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2>Añadir un nuevo reporte</h2>
+                            {{  form(reporte_form) }}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2>Reportes registrados del Centro</h2>
+                            <div>
+                                Se tiene [<b>{{ reporte|length }}</b>] reportes registrados
+                            </div>
 
-    {# condicional si el REPORTE es MAYOR a 0, se ejecuta el proceso #}
-    {% if reporte|length > 0  %}
-        {# Cantidad de Reportes
-        <div>Se tiene [<b>{{ reporte|length }}</b>] reportes registrados</div>
-        <hr>
-        #}
-        {# {% for reporte in reporte %} #}
-            {#
-            <h4>Gestion: {{ reporte.gestion }}</h4>
-            Actas:
-            <small>
-                {{ reporte.acta }}
-            </small>
-            <p>Conciliaciones virtuales: {{ reporte.virtual }}</p>
-            #}
+                            {# condicional si el REPORTE es MAYOR a 0, se ejecuta el proceso #}
+                            {% if reporte|length > 0  %}
+                                {# Cantidad de Reportes
+                                <div>Se tiene [<b>{{ reporte|length }}</b>] reportes registrados</div>
+                                <hr>
+                                #}
+                                {# {% for reporte in reporte %} #}
+                                {#
+                                <h4>Gestion: {{ reporte.gestion }}</h4>
+                                Actas:
+                                <small>
+                                    {{ reporte.acta }}
+                                </small>
+                                <p>Conciliaciones virtuales: {{ reporte.virtual }}</p>
+                                #}
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Gestión</th>
-                        <th>Formulario</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for reporte in reporte %}
-                    <tr>
-                        <td>{{ reporte.gestion }}</td>
-                        <td>
-                            {% if reporte.fileReporte %}
-                                <p>Imagen</p>
-                                <img src="{{ asset('public/uploads/files' ~ reporte.fileReporte) }}" />
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Gestión</th>
+                                        <th>Formulario</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for reporte in reporte %}
+                                        <tr>
+                                            <td>{{ reporte.gestion }}</td>
+                                            <td>
+                                                {% if reporte.fileReporte %}
+                                                    <p>Imagen</p>
+                                                    <img src="{{ asset('public/uploads/files' ~ reporte.fileReporte) }}" />
+                                                {% else%}
+                                                    <b>No tiene formulario cargado</b>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <a href="" class="btn btn-success">
+                                                    <i class="bi bi-eye-fill"></i>
+                                                    Ver
+                                                </a>
+                                                <a href="" class="btn btn-primary">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                    Editar
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="3">No se encontraron registros</td>
+                                        </tr>
+                                    {% endfor%}
+                                    </tbody>
+                                </table>
+                                {#
+                                {% if reporte.fileReporte %}
+                                    <p>Imagen</p>
+                                    <img src="{{ asset('public/uploads/files' ~ reporte.fileReporte) }}" />
+                                {% else%}
+                                    <b>No tiene formulario cargado</b>
+                                {% endif %}
+                                #}
+                                {# {% endfor %} #}
+
+                                {% if anterior >= 0 %}
+                                    <a href="{{ path('centros_show', { id: centro.id, offset: anterior }) }}" class="btn btn-primary">
+                                        Anterior
+                                    </a>
+                                {% endif %}
+                                {% if siguiente < reporte|length %}
+                                    <a href="{{ path('centros_show', { id: centro.id, offset: siguiente }) }}" class="btn btn-primary">
+                                        Siguiente
+                                    </a>
+                                {% endif%}
                             {% else%}
-                                <b>No tiene formulario cargado</b>
+                                <div>No se tiene registrado REPORTES</div>
                             {% endif %}
-                        </td>
-                        <td>
-                            <a href="">Ver</a>
-                            <a href="">Editar</a>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="3">No se encontraron registros</td>
-                    </tr>
-                {% endfor%}
-                </tbody>
-            </table>
-            {#
-            {% if reporte.fileReporte %}
-                <p>Imagen</p>
-                <img src="{{ asset('public/uploads/files' ~ reporte.fileReporte) }}" />
-            {% else%}
-                <b>No tiene formulario cargado</b>
-            {% endif %}
-            #}
-
-        {# {% endfor %} #}
-
-        <br>
-        {% if anterior >= 0 %}
-            <a href="{{ path('centros_show', { id: centro.id, offset: anterior }) }}">Anterior</a>
-        {% endif %}
-
-        {% if siguiente < reporte|length %}
-            <a href="{{ path('centros_show', { id: centro.id, offset: siguiente }) }}">Siguiente</a>
-        {% endif%}
-
-    {% else%}
-        <div>No se tiene registrado REPORTES</div>
-    {% endif %}
-
-    <h2>Añadir un nuevo reporte</h2>
-
-    {{  form(reporte_form) }}
-
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

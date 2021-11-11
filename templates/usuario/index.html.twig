@@ -5,52 +5,65 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Usuarios Registrados</h1>
+    <div class="container">
+        <h1>Usuarios Registrados</h1>
 
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-    {% endfor %}
-
-    <a href="{{ path('usuario_new') }}">Nuevo</a>
-
-    <a href="{{ path('inicio') }}">Volver a Inicio</a>
-    <br>
-    <br>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Primer Apellido</th>
-                <th>Segundo Apellido</th>
-                <th>Username</th>
-                <th>Contraseña</th>
-                <th>Roles</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for usuario in usuarios %}
-            <tr>
-                <td>{{ usuario.id }}</td>
-                <td>{{ usuario.nombre }}</td>
-                <td>{{ usuario.primerApellido }}</td>
-                <td>{{ usuario.segundoApellido }}</td>
-                <td>{{ usuario.username }}</td>
-                <td>{{ usuario.password }}</td>
-                <td>{{ usuario.roles ? usuario.roles|json_encode : '' }}</td>
-                <td>
-                    <a href="{{ path('usuario_show', {'id': usuario.id}) }}">Ver</a>
-                    <a href="{{ path('usuario_edit', {'id': usuario.id}) }}">Editar</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">No se encontraron registros</td>
-            </tr>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
+        <a href="{{ path('inicio') }}" class="btn btn-primary">
+            <i class="bi bi-arrow-return-left"></i>
+            Volver a Inicio
+        </a>
+        <a href="{{ path('usuario_new') }}" class="btn btn-success">
+            <i class="bi bi-plus-square"></i>
+            Nuevo
+        </a>
+        <br>
+        <br>
+        <table class="table table-responsive table-striped ">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Primer Apellido</th>
+                <th scope="col">Segundo Apellido</th>
+                <th scope="col">Username</th>
+                {# <th scope="col">Contraseña</th> #}
+                <th scope="col">Roles</th>
+                <th scope="col">Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.id }}</td>
+                    <td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.primerApellido }}</td>
+                    <td>{{ usuario.segundoApellido }}</td>
+                    <td>{{ usuario.username }}</td>
+                    {# <td>{{ usuario.password }}</td> #}
+                    <td>{{ usuario.roles ? usuario.roles|json_encode : '' }}</td>
+                    <td>
+                        <a href="{{ path('usuario_show', {'id': usuario.id}) }}" class="btn btn-success">
+                            <i class="bi bi-eye-fill"></i>
+                            Ver
+                        </a>
+                        <a href="{{ path('usuario_edit', {'id': usuario.id}) }}" class="btn btn-primary">
+                            <i class="bi bi-pencil-square"></i>
+                            Editar
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">No se encontraron registros</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
 {% endblock %}

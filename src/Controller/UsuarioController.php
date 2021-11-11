@@ -48,7 +48,7 @@ class UsuarioController extends AbstractController
             $entityManager->persist($usuario);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Se ha registrado exitosamente');
+            $this->addFlash('success', Usuario::REGISTRO_EXITOSO);
 
             return $this->redirectToRoute('usuario_index');
         }

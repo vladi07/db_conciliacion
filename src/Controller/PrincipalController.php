@@ -8,9 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/principal")
- */
 class PrincipalController extends AbstractController
 {
     /**
@@ -23,12 +20,5 @@ class PrincipalController extends AbstractController
         return $this -> render('principal/index.html.twig', [
             'centros' => $centro,
         ]);
-    }
-
-    /**
-     * @Route ("/{id}", name="ver_principal", methods={"GET"})
-     */
-    public function show(){
-
     }
 }

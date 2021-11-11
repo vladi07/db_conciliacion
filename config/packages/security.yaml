@@ -39,6 +39,7 @@ security:
         - { path: ^/admin, roles: ["ROLE_ADMIN"] }
         - { path: ^/usuario, roles: ROLE_ADMIN }
         - { path: ^/centro, roles: [ROLE_USER, ROLE_ADMIN] }
-        # - { path: ^/principal, roles: ROLE_ADMIN }
         - { path: ^/principal, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/dpto, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/reporte, roles: [ROLE_USER, ROLE_ADMIN] }
         # - { path: ^/profile, roles: ROLE_USER }

@@ -59,9 +59,13 @@ class DepartamentoController extends AbstractController
     #[Route("/{id}", name: 'departamento_show', methods: ["GET","POST"])]
     public function show(Request $request, Departamento $departamento, LocalidadRepository $localidadRepository): Response
     {
+        /*
         $localidad = new Localidad();
         $formulario = $this->createForm(LocalidadType::class, $localidad);
+        */
+
         /* Usamos el HANDLEREQUEST para asignar los valores de los datos */
+        /*
         $formulario->handleRequest($request);
 
         if ($formulario->isSubmitted() && $formulario->isValid()) {
@@ -76,14 +80,17 @@ class DepartamentoController extends AbstractController
         $offset = max(0, $request->query->getInt('offset',0));
 
         $paginator = $localidadRepository->getLocalidadPaginator($departamento, $offset);
+        */
 
         return $this->render('departamento/show.html.twig', [
             'departamento' => $departamento,
+            /*
             'localidad' => $paginator,
             'anterior' => $offset - LocalidadRepository::PAGINATOR_PER_PAGE,
             'siguiente' => min(count($paginator), $offset + LocalidadRepository::PAGINATOR_PER_PAGE),
 
             'localidad_form' => $formulario->createView()
+            */
         ]);
     }
 

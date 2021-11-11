@@ -59,9 +59,9 @@ class CentrosController extends AbstractController
             return $this->redirectToRoute('centros_index');
         }
 
-        return $this->render('centros/new.html.twig' , [
+        return $this->renderForm('centros/new.html.twig' , [
             'centro' => $centro,
-            'formCentro' => $formulario->createView(),
+            'formCentro' => $formulario,
         ]);
     }
 

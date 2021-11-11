@@ -5,11 +5,17 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Editar Datos del DPTO</h1>
-
-    {{ include('departamento/_form.html.twig', {'button_label': 'Actualizar'}) }}
-
-    <a href="{{ path('departamento_index') }}">Volver</a>
-
-    {{ include('departamento/_delete_form.html.twig') }}
+    <div class="container d-flex justify-content-center">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="font-weight-bold">Editar Datos del DPTO</h1>
+                {{ include('departamento/_form.html.twig', {'button_label': 'Actualizar'}) }}
+                <a href="{{ path('departamento_index') }}" class="btn btn-primary">
+                    <i class="bi bi-arrow-return-left"></i>
+                    Volver
+                </a>
+                {{ include('departamento/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

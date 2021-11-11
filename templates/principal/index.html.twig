@@ -6,30 +6,48 @@
 
 {% block body %}
     {# imprimimos el contenido de llave #}
-    {{ dump(centros) }}
-    <h2>Centros de Conciliación Registrados</h2>
+    {# {{ dump(centros) }} #}
+    <div class="container">
+        <br>
+        <h2 class="text-center fw-bold">Base de Datos de Conciliacones Realizadas por los Centros de Conciliación</h2>
+        <h3 class="text-center fw-normal" >A partir de la Promulgacion de la Ley N° 708 "Ley de Conciliación y Arbitraje"</h3>
 
-    {# for OBJETO in LLAVE O PARAMETRO #}
-    {% for centro in centros %}
+        {# for OBJETO in LLAVE O PARAMETRO #}
+        {# {% for centro in centros %} #}
         {# Objeto que se envia al por el parametro #}
-        <h4>{{ centro }}</h4>
-    {% endfor %}
-    <hr>
-    <div>
-        <h2>Modulo de Departamentos</h2>
-        <a href="{{ path('departamento_index') }}" class="">Ingresar</a>
-    </div>
-    <div>
-        <h2>Módulo de Centros</h2>
-        <a href="{{ path('centros_index') }}" class="">Ingresar</a>
-    </div>
-    <div>
-        <h2>Módulo de Reportes</h2>
-        <a href="" class="">Ingresar</a>
-    </div>
-    <div>
-        <h2>Módulo de Usuarios</h2>
-        <a href="{{ path('usuario_index') }}" class="">Ingresar</a>
-    </div>
+        {# <h4>{{ centro }}</h4> #}
+        {# {% endfor %} #}
 
+        <br>
+        <div class="row row-cols-2">
+            <div class="col card">
+                <h2 class="card-title text-md-center">Modulo de Departamentos</h2>
+                <a href="{{ path('departamento_index') }}" class="btn btn-primary">
+                    <i class="bi bi-box-arrow-in-up-right"></i>
+                    Ingresar
+                </a>
+            </div>
+            <div class="col card">
+                <h2 class="card-title text-md-center">Módulo de Centros</h2>
+                <a href="{{ path('centros_index') }}" class="btn btn-success">
+                    <i class="bi bi-house-fill"></i>
+                    Ingresar
+                </a>
+            </div>
+            <div class="col card">
+                <h2 class="card-title text-md-center">Módulo de Reportes</h2>
+                <a href="" class="btn btn-info">
+                    <i class="bi bi-reception-4"></i>
+                    Ingresar
+                </a>
+            </div>
+            <div class="col card">
+                <h2 class="card-title text-md-center">Módulo de Usuarios</h2>
+                <a href="{{ path('usuario_index') }}" class="btn btn-warning">
+                    <i class="bi bi-people-fill"></i>
+                    Ingresar
+                </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
